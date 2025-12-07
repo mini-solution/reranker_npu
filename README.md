@@ -1,6 +1,7 @@
 # reranker_npu
 
 # 安装依赖
+- 下载最近release.zip
 - 安装ryzen-ai-1.6.0
 - conda activate ryzen-ai-1.6.0
 - pip install transformers
