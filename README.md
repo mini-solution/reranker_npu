@@ -4,15 +4,17 @@
 - 下载最近release.zip
 - 安装ryzen-ai-1.6.0
 - conda activate ryzen-ai-1.6.0
-- pip install transformers
+- pip install transformers torch onnxscipt
 
-# 运行
+# 快速开始
+
+#### 运行
 
 ```bash
 python test.py
 ```
 
-# 结果
+#### 结果
 ```json
 {
 	'results': [{
@@ -29,4 +31,15 @@ python test.py
 		'score': 0.5147662162780762
 	}]
 }
+```
+
+# 从头开始
+
+```bash
+# 下载导出onnx
+python export2onnx.py
+# 量化模型
+python quantize.py
+# 执行测试
+python test.py
 ```
