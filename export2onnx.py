@@ -42,7 +42,7 @@ tokenizer.save_pretrained(save_dir)
 import subprocess
 params_to_fix = {
     "batch": 1,        # 有时是 "batch_size"
-    "sequence": 128,    # 也可能是 "sequence_length"
+    "sequence": seq_len,    # 也可能是 "sequence_length"
 }
 input_model_path = 'onnx_model/model.onnx'
 output_model_path = 'onnx_model/model_fixed.onnx'

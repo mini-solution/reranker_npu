@@ -47,8 +47,11 @@ class reranker:
             # 安全地计算概率（sigmoid）
             prob = 1 / (1 + np.exp(-logit))
             scores.append(float(prob.squeeze()))
-        sorted_candidates = [x for _, x in sorted(zip(scores, self.candidates), reverse=True)]
-        return ({
-            "scores":scores,
-            "candidates": sorted_candidates,
-        })
+        pairs = list(zip(scores, self.candidates))
+        pairs.sort(key=lambda x: x[0], reverse=True)
+        return {
+            "results": [
+                {"candidate": c, "score": float(s)}
+                for s, c in pairs
+            ]
+        }

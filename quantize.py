@@ -36,15 +36,20 @@ class TextCalibrationReader(CalibrationDataReader):
     def get_next(self):
         return next(self.enum_data, None)
 
-from onnxruntime.quantization.quant_utils import QuantFormat, QuantType
-from quark.onnx.quantization.config import QConfig
+# from onnxruntime.quantization.quant_utils import QuantFormat, QuantType
+# from quark.onnx.quantization.config import QConfig
+
 from quark.onnx import ModelQuantizer
+from quark.onnx.quantization.config import Config
+from quark.onnx.quantization.config.custom_config import get_default_config
 
 # reader = TextCalibrationReader("input_ids", "attention_mask")
-quant_config = QConfig.get_default_config("BF16")
-quant_config.global_quant_config.extra_options["BF16QDQToCast"] = True
-quant_config.global_quant_config.extra_options["UseRandomData"] = True
-quantizer = ModelQuantizer(quant_config)
+quant_config = get_default_config("BF16")
+quant_config.extra_options["BF16QDQToCast"] = True
+quant_config.extra_options["UseRandomData"] = True
+# quantizer = ModelQuantizer(quant_config)
+config = Config(global_quant_config=quant_config)
+quantizer = ModelQuantizer(config)
 quantizer.quantize_model(
     model_input="onnx_model/model_shaped.onnx",
     model_output="onnx_static/quantize.onnx",
